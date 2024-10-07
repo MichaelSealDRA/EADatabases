@@ -68,4 +68,7 @@
     <Build Include="dbo\StoredProcedures\spAngles_Insert.sql" />
     <Build Include="dbo\StoredProcedures\spAngles_Update.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
+  </ItemGroup>
 </Project>
