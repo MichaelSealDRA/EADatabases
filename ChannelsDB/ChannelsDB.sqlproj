@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>AnglesDB</Name>
+    <Name>ChannelsDB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{4ced709a-afce-4135-9752-0b48b414ffb5}</ProjectGuid>
+    <ProjectGuid>{d47bf736-d216-4976-99bb-42ed2db4b735}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>AnglesDB</RootNamespace>
-    <AssemblyName>AnglesDB</AssemblyName>
+    <RootNamespace>ChannelsDB</RootNamespace>
+    <AssemblyName>ChannelsDB</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -57,22 +57,22 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="dbo" />
-    <Folder Include="dbo\Tables" />
     <Folder Include="dbo\StoredProcedures" />
+    <Folder Include="dbo\Tables" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Angles.sql" />
-    <Build Include="dbo\StoredProcedures\spAngles_GetAll.sql" />
-    <Build Include="dbo\StoredProcedures\spAngles_Get.sql" />
-    <Build Include="dbo\StoredProcedures\spAngles_Delete.sql" />
-    <Build Include="dbo\StoredProcedures\spAngles_Insert.sql" />
-    <Build Include="dbo\StoredProcedures\spAngles_Update.sql" />
-    <Build Include="dbo\StoredProcedures\spAngles_GetByDesignation.sql" />
+    <Build Include="dbo\Tables\Channels.sql" />
+    <Build Include="dbo\StoredProcedures\spChannels_Delete.sql" />
+    <Build Include="dbo\StoredProcedures\spChannels_Get.sql" />
+    <Build Include="dbo\StoredProcedures\spChannels_GetAll.sql" />
+    <Build Include="dbo\StoredProcedures\spChannels_GetByDesignation.sql" />
+    <Build Include="dbo\StoredProcedures\spChannels_Insert.sql" />
+    <Build Include="dbo\StoredProcedures\spChannels_Update.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Script.PostDeployment.sql" />
+    <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AnglesDB.publish.xml" />
+    <None Include="ChannelsDB.publish.xml" />
   </ItemGroup>
 </Project>
