@@ -1,0 +1,6 @@
+@EADatabaseApi_HostAddress = http://localhost:5024
+
+GET {{EADatabaseApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
