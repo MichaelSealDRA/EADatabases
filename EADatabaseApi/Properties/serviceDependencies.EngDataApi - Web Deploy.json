@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "apis1": {
+      "apiEndpoint": "https://eadatabaseapiapi.azure-api.net/",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/EADatabaseApiapi/apis/EADatabaseApi",
+      "type": "apis.azure"
+    },
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/EngDataApi/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsAngles_2F094BEEC0",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/steelprofiles/databases/AnglesDB",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:Angles",
+      "dynamicId": null
+    }
+  }
+}

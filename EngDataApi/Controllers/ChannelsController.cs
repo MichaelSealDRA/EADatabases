@@ -1,11 +1,11 @@
 ﻿using DataAccess;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EADatabaseApi.Controllers;
 
 [Route("SteelProfiles/[controller]")]
 [ApiController]
-//[Route("/")]
 public class ChannelsController : ControllerBase
 {
     private readonly IChannelData _data;
@@ -13,12 +13,12 @@ public class ChannelsController : ControllerBase
     {
         _data = data;
     }
-    [HttpGet(Name = "GetAllChannels")]
-    public async Task<IResult> GetChannels()
+    [HttpGet("All", Name = "GetAllChannels")]
+    public async Task<IResult> GetAllChannels()
     {
         try
         {
-            var results = await _data.GetChannels();
+            var results = await _data.GetAllChannels();
             return Results.Ok(results);
         }
         catch (Exception ex)
@@ -27,27 +27,33 @@ public class ChannelsController : ControllerBase
         }
     }
 
-    [HttpGet("id={id}", Name = "GetChannelById")]
-    public async Task<IActionResult> GetChannelById(int id)
+    [HttpGet(Name = "GetChannels")]
+    public async Task<IResult> GetChannels(
+    [FromQuery] int? id,
+    [FromQuery] string? standard,
+    [FromQuery] string? description,
+    [FromQuery] string? designation)
     {
         try
         {
-            var results = await _data.GetChannel(id);
-            if (results == null) return NotFound();
-            return Ok(results);
+            var results = await _data.GetChannels(id, standard, description, designation);
+            if (results == null)
+                return Results.NotFound("No Channel found matching the specified criteria.");
+
+            return Results.Ok(results);
         }
         catch (Exception ex)
         {
-            return Problem(ex.Message);
+            return Results.Problem("An error occurred: " + ex.Message);
         }
     }
 
-    [HttpGet("designation={designation}", Name = "GetChannelByDesignation")]
-    public async Task<IResult> GetChannelByDesignation(string designation)
+    [HttpGet("id={id}", Name = "GetChannelById")]
+    public async Task<IResult> GetChannel(int id)
     {
         try
         {
-            var results = await _data.GetChannel(designation);
+            var results = await _data.GetChannelById(id);
             if (results == null) return Results.NotFound();
             return Results.Ok(results);
         }
@@ -70,8 +76,7 @@ public class ChannelsController : ControllerBase
             return Results.Problem(ex.Message);
         }
     }
-
-    [HttpPut("{id}", Name = "UpdateChannel")]
+    [HttpPut(Name = "UpdateChannel")]
     public async Task<IResult> UpdateChannel([FromBody] ChannelProfile profile)
     {
         try
@@ -84,7 +89,6 @@ public class ChannelsController : ControllerBase
             return Results.Problem(ex.Message);
         }
     }
-
     [HttpDelete("{id}", Name = "DeleteChannel")]
     public async Task<IResult> DeleteChannel(int id)
     {

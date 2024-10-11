@@ -1,0 +1,6 @@
+@EngDataApi_HostAddress = http://localhost:5124
+
+GET {{EngDataApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

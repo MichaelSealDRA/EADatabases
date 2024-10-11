@@ -6,7 +6,6 @@ namespace EADatabaseApi.Controllers;
 
 [Route("SteelProfiles/[controller]")]
 [ApiController]
-//[Route("/")]
 public class AnglesController : ControllerBase
 {
     private readonly IAngleData _data;
@@ -14,12 +13,12 @@ public class AnglesController : ControllerBase
     {
         _data = data;
     }
-    [HttpGet(Name = "GetAllAngles")]
+    [HttpGet("All", Name = "GetAllAngles")]
     public async Task<IResult> GetAllAngles()
     {
         try
         {
-            var results = await _data.GetAngles();
+            var results = await _data.GetAllAngles();
             return Results.Ok(results);
         }
         catch (Exception ex)
@@ -28,27 +27,33 @@ public class AnglesController : ControllerBase
         }
     }
 
-    [HttpGet("id={id}", Name = "GetAngleById")]
-    public async Task<IActionResult> GetAngleById(int id)
+    [HttpGet(Name = "GetAngles")]
+    public async Task<IResult> GetAngles(
+    [FromQuery] int? id,
+    [FromQuery] string? standard,
+    [FromQuery] string? description,
+    [FromQuery] string? designation)
     {
         try
         {
-            var results = await _data.GetAngle(id);
-            if (results == null) return NotFound();
-            return Ok(results);
+            var results = await _data.GetAngles(id, standard, description, designation);
+            if (results == null)
+                return Results.NotFound("No angle found matching the specified criteria.");
+
+            return Results.Ok(results);
         }
         catch (Exception ex)
         {
-            return Problem(ex.Message);
+            return Results.Problem("An error occurred: " + ex.Message);
         }
     }
 
-    [HttpGet("designation={designation}", Name = "GetAngleByDesignation")]
-    public async Task<IResult> GetAngleByDesignation(string designation)
+    [HttpGet("id={id}", Name = "GetAngleById")]
+    public async Task<IResult> GetAngle(int id)
     {
         try
         {
-            var results = await _data.GetAngle(designation);
+            var results = await _data.GetAngleById(id);
             if (results == null) return Results.NotFound();
             return Results.Ok(results);
         }
@@ -71,7 +76,7 @@ public class AnglesController : ControllerBase
             return Results.Problem(ex.Message);
         }
     }
-    [HttpPut("{id}", Name = "UpdateAngle")]
+    [HttpPut(Name = "UpdateAngle")]
     public async Task<IResult> UpdateAngle([FromBody] AngleProfile profile)
     {
         try

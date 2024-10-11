@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>AnglesDB</Name>
+    <Name>EngDataDB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{4ced709a-afce-4135-9752-0b48b414ffb5}</ProjectGuid>
+    <ProjectGuid>{3b96fab5-536c-4d23-8a08-e44bb694c4d3}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>AnglesDB</RootNamespace>
-    <AssemblyName>AnglesDB</AssemblyName>
+    <RootNamespace>EngDataDB</RootNamespace>
+    <AssemblyName>EngDataDB</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -56,24 +56,39 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="dbo" />
-    <Folder Include="dbo\Tables" />
-    <Folder Include="dbo\StoredProcedures" />
+    <Folder Include="SteelProfiles" />
+    <Folder Include="SteelProfiles\Angles" />
+    <Folder Include="SteelProfiles\Angles\dbo" />
+    <Folder Include="SteelProfiles\Channels" />
+    <Folder Include="SteelProfiles\Beams" />
+    <Folder Include="SteelProfiles\Pipes" />
+    <Folder Include="SteelProfiles\Channels\dbo" />
+    <Folder Include="SteelProfiles\Channels\dbo\StoredProcedures" />
+    <Folder Include="SteelProfiles\Channels\dbo\Tables" />
+    <Folder Include="SteelProfiles\Angles\dbo\Tables" />
+    <Folder Include="SteelProfiles\Angles\dbo\StroredProcedures" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Angles.sql" />
-    <Build Include="dbo\StoredProcedures\spAngles_GetAll.sql" />
-    <Build Include="dbo\StoredProcedures\spAngles_Get.sql" />
-    <Build Include="dbo\StoredProcedures\spAngles_Delete.sql" />
-    <Build Include="dbo\StoredProcedures\spAngles_Insert.sql" />
-    <Build Include="dbo\StoredProcedures\spAngles_Update.sql" />
-    <Build Include="dbo\StoredProcedures\spAngles_GetByDesignation.sql" />
+    <Build Include="SteelProfiles\Channels\dbo\Tables\Channels.sql" />
+    <Build Include="SteelProfiles\Angles\dbo\Tables\Angles.sql" />
+    <Build Include="SteelProfiles\Channels\dbo\StoredProcedures\spChannels_Delete.sql" />
+    <Build Include="SteelProfiles\Channels\dbo\StoredProcedures\spChannels_Get.sql" />
+    <Build Include="SteelProfiles\Channels\dbo\StoredProcedures\spChannels_GetAll.sql" />
+    <Build Include="SteelProfiles\Channels\dbo\StoredProcedures\spChannels_GetById.sql" />
+    <Build Include="SteelProfiles\Channels\dbo\StoredProcedures\spChannels_Insert.sql" />
+    <Build Include="SteelProfiles\Channels\dbo\StoredProcedures\spChannels_Update.sql" />
+    <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_Delete.sql" />
+    <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_Get.sql" />
+    <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_GetAll.sql" />
+    <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_GetById.sql" />
+    <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_Insert.sql" />
+    <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AnglesDB.publish.xml" />
-    <None Include="AnglesDB_Azure.publish.publish.xml" />
+    <None Include="EngDataDB.publish.xml" />
+    <None Include="EngDataDB_Azure.publish.publish.xml" />
   </ItemGroup>
 </Project>
