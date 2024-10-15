@@ -1,9 +1,12 @@
 ﻿using DataAccess;
+using PopulateDBs;
 
-internal class Program
+public class Program
 {
     static async Task Main(string[] args)
     {
+        await Methods.PopulateDB();
+
         IAngleProfile angle = await DatabaseAccess.GetSteelProfile<AngleProfile>("80x80x10");
         Console.WriteLine("Designation: " + angle.Designation);
         Console.WriteLine("Height: " + angle.Height);
@@ -19,4 +22,6 @@ internal class Program
         Console.WriteLine("FlangeThickness: " + channel.FlangeThickness);
         Console.ReadLine();
     }
+
+    
 }

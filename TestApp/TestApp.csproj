@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CodeLibrary\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\..\PopulateDBs\PopulateDBs.csproj" />
   </ItemGroup>
 
 </Project>

@@ -83,6 +83,7 @@
     <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_GetById.sql" />
     <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_Insert.sql" />
     <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_Update.sql" />
+    <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_GetPrimaryKeyInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
