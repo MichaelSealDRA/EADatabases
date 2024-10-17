@@ -9,7 +9,6 @@ namespace TodoApi.Controllers;
 
 [Route("[controller]")]
 [ApiController]
-//[Route("/")]
 public class AuthenticationController : ControllerBase
 {
     private readonly IConfiguration _config;
@@ -18,7 +17,7 @@ public class AuthenticationController : ControllerBase
         _config = config;
     }
     public record AuthenticationData(string? UserName, string? Password);
-    public record UserData(int Id, string FirstName, string LastName, string UserName);
+    public record UserData(int Id, string FirstName, string LastName, string UserName, string Access);
 
     [HttpPost("token")]
     [AllowAnonymous]
@@ -48,13 +47,14 @@ public class AuthenticationController : ControllerBase
         claims.Add(new(JwtRegisteredClaimNames.UniqueName, user.UserName));
         claims.Add(new(JwtRegisteredClaimNames.GivenName, user.FirstName));
         claims.Add(new(JwtRegisteredClaimNames.FamilyName, user.LastName));
+        claims.Add(new Claim("Access", user.Access));
 
         var token = new JwtSecurityToken(
             _config.GetValue<string>("Authentication:Issuer"),
             _config.GetValue<string>("Authentication:Audience"),
             claims,
             DateTime.UtcNow,
-            DateTime.UtcNow.AddMinutes(10), // Update value after testing
+            DateTime.UtcNow.AddMinutes(10), // UPDATE FOR PRODUCTION - DECIDE ON TIME
             signingCredentials);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
@@ -65,10 +65,13 @@ public class AuthenticationController : ControllerBase
         if (CompareValues(data.UserName, "mseal") &&
             CompareValues(data.Password, "12345"))
         {
-            return new UserData(1, "Michael", "Seal", data.UserName!);
+            return new UserData(1, "Michael", "Seal", data.UserName!, "EA");
         }
-
-        // Add other people here
+        else if (CompareValues(data.UserName, "nburger") &&
+                CompareValues(data.Password, "12345"))
+        {
+            return new UserData(2, "Nealon", "Burger", data.UserName!, "EA,DRA");
+        }
 
         return null;
     }

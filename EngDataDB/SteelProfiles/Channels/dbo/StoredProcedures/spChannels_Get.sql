@@ -1,18 +1,14 @@
 ﻿CREATE PROCEDURE [dbo].[spChannels_Get]
-    @Id int = NULL,
     @Standard nvarchar(50) = NULL,
-    @Description nvarchar(50) = NULL,
+    @Variation nvarchar(50) = NULL,
     @Designation nvarchar(50) = NULL
 AS
 BEGIN
     SELECT 
-        Id, Standard, Description, Designation, 
-        Height, Width, WebThickness, FlangeThickness, InsideRadius, OutsideRadius, InsideHeight, WallAngle,
-        a_c, a_y
+        Id, Standard, Modified, Metric, Preferred, Variation, Designation, Description, G, h, b, s, t, A, r1, r2, Beta, Ix, Sx, Rx, Iy, Sy, Ry,Tr, Ts, ac, ay, Verified, Reference, Official, Comments, Date, Active, Uploader, Access
     FROM dbo.[Channels]
     WHERE 
-        (@Id IS NULL OR Id = @Id) AND
         (@Standard IS NULL OR Standard = @Standard) AND
-        (@Description IS NULL OR Description = @Description) AND
+        (@Variation IS NULL OR Variation = @Variation) AND
         (@Designation IS NULL OR Designation = @Designation);
 END

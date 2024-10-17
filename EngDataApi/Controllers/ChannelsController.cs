@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using EngDataApi;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,13 +14,17 @@ public class ChannelsController : ControllerBase
     {
         _data = data;
     }
+
     [HttpGet("All", Name = "GetAllChannels")]
     public async Task<IResult> GetAllChannels()
     {
         try
         {
             var results = await _data.GetAllChannels();
-            return Results.Ok(results);
+
+            var listResults = ControllerMethods.FilterByAccess(results.ToList(), User);
+
+            return Results.Ok(listResults);
         }
         catch (Exception ex)
         {
@@ -29,17 +34,17 @@ public class ChannelsController : ControllerBase
 
     [HttpGet(Name = "GetChannels")]
     public async Task<IResult> GetChannels(
-    [FromQuery] int? id,
     [FromQuery] string? standard,
-    [FromQuery] string? description,
+    [FromQuery] string? variation,
     [FromQuery] string? designation)
     {
         try
         {
-            var results = await _data.GetChannels(id, standard, description, designation);
+            var results = await _data.GetChannels(standard, variation, designation);
+
             if (results == null)
                 return Results.NotFound("No Channel found matching the specified criteria.");
-
+               
             return Results.Ok(results);
         }
         catch (Exception ex)
@@ -64,11 +69,13 @@ public class ChannelsController : ControllerBase
     }
 
     [HttpPost(Name = "InsertChannel")]
-    public async Task<IResult> InsertChannel([FromBody] ChannelProfile profile)
+    public async Task<IResult> InsertChannel([FromBody] ChannelDTO profile)
     {
+        var userName = ControllerMethods.GetUserName(User);
+
         try
         {
-            await _data.InsertChannel(profile);
+            await _data.InsertChannel(profile, userName);
             return Results.Ok();
         }
         catch (Exception ex)
@@ -77,11 +84,24 @@ public class ChannelsController : ControllerBase
         }
     }
     [HttpPut(Name = "UpdateChannel")]
-    public async Task<IResult> UpdateChannel([FromBody] ChannelProfile profile)
+    public async Task<IResult> UpdateChannel([FromBody] ChannelDTO profile)
     {
         try
         {
             await _data.UpdateChannel(profile);
+            return Results.Ok();
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(ex.Message);
+        }
+    }
+    [HttpPut("{id}", Name = "ArchiveChannel")]
+    public async Task<IResult> ArchiveChannel(int id)
+    {
+        try
+        {
+            await _data.ArchiveChannel(id);
             return Results.Ok();
         }
         catch (Exception ex)

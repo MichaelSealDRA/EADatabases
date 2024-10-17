@@ -67,6 +67,12 @@
     <Folder Include="SteelProfiles\Channels\dbo\Tables" />
     <Folder Include="SteelProfiles\Angles\dbo\Tables" />
     <Folder Include="SteelProfiles\Angles\dbo\StroredProcedures" />
+    <Folder Include="Users" />
+    <Folder Include="Users\dbo" />
+    <Folder Include="Users\dbo\Tables" />
+    <Folder Include="SteelProfiles\Beams\dbo" />
+    <Folder Include="SteelProfiles\Beams\dbo\StroredProcedures" />
+    <Folder Include="SteelProfiles\Beams\dbo\Tables" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="SteelProfiles\Channels\dbo\Tables\Channels.sql" />
@@ -83,13 +89,20 @@
     <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_GetById.sql" />
     <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_Insert.sql" />
     <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_Update.sql" />
-    <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_GetPrimaryKeyInfo.sql" />
+    <Build Include="Users\dbo\Tables\Users.sql" />
+    <Build Include="SteelProfiles\Channels\dbo\StoredProcedures\spChannels_Archive.sql" />
+    <Build Include="SteelProfiles\Angles\dbo\StroredProcedures\spAngles_Archive.sql" />
+    <Build Include="SteelProfiles\Beams\dbo\StroredProcedures\spBeams_Archive.sql" />
+    <Build Include="SteelProfiles\Beams\dbo\StroredProcedures\spBeams_Delete.sql" />
+    <Build Include="SteelProfiles\Beams\dbo\StroredProcedures\spBeams_Get.sql" />
+    <Build Include="SteelProfiles\Beams\dbo\StroredProcedures\spBeams_GetAll.sql" />
+    <Build Include="SteelProfiles\Beams\dbo\StroredProcedures\spBeams_GetById.sql" />
+    <Build Include="SteelProfiles\Beams\dbo\StroredProcedures\spBeams_Insert.sql" />
+    <Build Include="SteelProfiles\Beams\dbo\StroredProcedures\spBeams_Update.sql" />
+    <Build Include="SteelProfiles\Beams\dbo\Tables\Beams.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Script.PostDeployment.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="EngDataDB.publish.xml" />
     <None Include="EngDataDB_Azure.publish.publish.xml" />
+    <None Include="EngDataDB.publish.xml" />
   </ItemGroup>
 </Project>

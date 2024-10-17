@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Angles]
+﻿CREATE TABLE [dbo].[Beams]
 (
     [Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Standard] NVARCHAR(50) NOT NULL,
@@ -11,10 +11,12 @@
     [G] FLOAT NULL,
     [h] FLOAT NOT NULL,
     [b] FLOAT NOT NULL,
+    [s] FLOAT NULL,
     [t] FLOAT NULL,
     [A] FLOAT NULL,
     [r1] FLOAT NULL,
     [r2] FLOAT NULL,
+    [Beta] FLOAT NULL,
     [Ix] FLOAT NULL,
     [Sx] FLOAT NULL,
     [Rx] FLOAT NULL,
@@ -23,8 +25,6 @@
     [Ry] FLOAT NULL,
     [Tr] FLOAT NULL,
     [Ts] FLOAT NULL,
-    [ax] FLOAT NULL,
-    [ay] FLOAT NULL,
     [Verified] BIT NOT NULL DEFAULT 0,
     [Reference] NVARCHAR(50) NULL,
     [Official] BIT NOT NULL DEFAULT 1,

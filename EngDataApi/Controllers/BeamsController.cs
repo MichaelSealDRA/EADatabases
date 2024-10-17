@@ -6,21 +6,21 @@ namespace EADatabaseApi.Controllers;
 
 [Route("SteelProfiles/[controller]")]
 [ApiController]
-public class AnglesController : ControllerBase
+public class BeamsController : ControllerBase
 {
-    private readonly IAngleData _data;
+    private readonly IBeamData _data;
 
-    public AnglesController(IAngleData data)
+    public BeamsController(IBeamData data)
     {
         _data = data;
     }
 
-    [HttpGet("All", Name = "GetAllAngles")]
-    public async Task<IResult> GetAllAngles()
+    [HttpGet("All", Name = "GetAllBeams")]
+    public async Task<IResult> GetAllBeams()
     {
         try
         {
-            var results = await _data.GetAllAngles();
+            var results = await _data.GetAllBeams();
             var listResults = ControllerMethods.FilterByAccess(results.ToList(), User);
             return Results.Ok(listResults);
         }
@@ -30,17 +30,17 @@ public class AnglesController : ControllerBase
         }
     }
 
-    [HttpGet(Name = "GetAngles")]
-    public async Task<IResult> GetAngles(
+    [HttpGet(Name = "GetBeams")]
+    public async Task<IResult> GetBeams(
         [FromQuery] string? standard,
         [FromQuery] string? variation,
         [FromQuery] string? designation)
     {
         try
         {
-            var results = await _data.GetAngles(standard, variation, designation);
+            var results = await _data.GetBeams(standard, variation, designation);
             if (results == null)
-                return Results.NotFound("No Angle found matching the specified criteria.");
+                return Results.NotFound("No Beam found matching the specified criteria.");
             return Results.Ok(results);
         }
         catch (Exception ex)
@@ -49,12 +49,12 @@ public class AnglesController : ControllerBase
         }
     }
 
-    [HttpGet("id={id}", Name = "GetAngleById")]
-    public async Task<IResult> GetAngle(int id)
+    [HttpGet("id={id}", Name = "GetBeamById")]
+    public async Task<IResult> GetBeam(int id)
     {
         try
         {
-            var results = await _data.GetAngleById(id);
+            var results = await _data.GetBeamById(id);
             if (results == null) return Results.NotFound();
             return Results.Ok(results);
         }
@@ -64,14 +64,14 @@ public class AnglesController : ControllerBase
         }
     }
 
-    [HttpPost(Name = "InsertAngle")]
-    public async Task<IResult> InsertAngle([FromBody] AngleDTO profile)
+    [HttpPost(Name = "InsertBeam")]
+    public async Task<IResult> InsertBeam([FromBody] BeamDTO profile)
     {
         var userName = ControllerMethods.GetUserName(User);
 
         try
         {
-            await _data.InsertAngle(profile, userName);
+            await _data.InsertBeam(profile, userName);
             return Results.Ok();
         }
         catch (Exception ex)
@@ -80,12 +80,12 @@ public class AnglesController : ControllerBase
         }
     }
 
-    [HttpPut(Name = "UpdateAngle")]
-    public async Task<IResult> UpdateAngle([FromBody] AngleDTO profile)
+    [HttpPut(Name = "UpdateBeam")]
+    public async Task<IResult> UpdateBeam([FromBody] BeamDTO profile)
     {
         try
         {
-            await _data.UpdateAngle(profile);
+            await _data.UpdateBeam(profile);
             return Results.Ok();
         }
         catch (Exception ex)
@@ -94,12 +94,12 @@ public class AnglesController : ControllerBase
         }
     }
 
-    [HttpPut("{id}", Name = "ArchiveAngle")]
-    public async Task<IResult> ArchiveAngle(int id)
+    [HttpPut("{id}", Name = "ArchiveBeam")]
+    public async Task<IResult> ArchiveBeam(int id)
     {
         try
         {
-            await _data.ArchiveAngle(id);
+            await _data.ArchiveBeam(id);
             return Results.Ok();
         }
         catch (Exception ex)
@@ -108,12 +108,12 @@ public class AnglesController : ControllerBase
         }
     }
 
-    [HttpDelete("{id}", Name = "DeleteAngle")]
-    public async Task<IResult> DeleteAngle(int id)
+    [HttpDelete("{id}", Name = "DeleteBeam")]
+    public async Task<IResult> DeleteBeam(int id)
     {
         try
         {
-            await _data.DeleteAngle(id);
+            await _data.DeleteBeam(id);
             return Results.Ok();
         }
         catch (Exception ex)

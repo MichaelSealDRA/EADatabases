@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[spAngles_GetById]
+﻿CREATE PROCEDURE [dbo].[spBeams_GetById]
     @Id INT
 AS
 BEGIN
     SELECT 
         Id, Standard, Modified, Metric, Preferred, Variation, Designation, Description, 
-        G, h, b, t, A, r1, r2, Ix, Sx, Rx, Iy, Sy, Ry, Tr, Ts, ax, ay, 
+        G, h, b, s, t, A, r1, r2, Beta, Ix, Sx, Rx, Iy, Sy, Ry, Tr, Ts, 
         Verified, Reference, Official, Comments, Date, Active, Uploader, Access
-    FROM dbo.[Angles]
+    FROM dbo.[Beams]
     WHERE Id = @Id;
 END;

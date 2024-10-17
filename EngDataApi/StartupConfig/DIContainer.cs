@@ -53,6 +53,7 @@ public static class EADatabaseApiDI
     {
         builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
         builder.Services.AddSingleton<IAngleData, AngleData>();
+        builder.Services.AddSingleton<IBeamData, BeamData>();
         builder.Services.AddSingleton<IChannelData, ChannelData>();
     }
 

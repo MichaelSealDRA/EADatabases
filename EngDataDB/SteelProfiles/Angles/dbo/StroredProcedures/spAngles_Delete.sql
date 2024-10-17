@@ -1,8 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spAngles_Delete]
-	@Id int
+    @Id INT
 AS
-begin
-	delete 
-	from dbo.[Angles]
-	where Id = @Id;
-end
+BEGIN
+    DELETE FROM dbo.[Angles]
+    WHERE Id = @Id;
+END;
