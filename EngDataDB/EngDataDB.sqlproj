@@ -73,6 +73,13 @@
     <Folder Include="SteelProfiles\Beams\dbo" />
     <Folder Include="SteelProfiles\Beams\dbo\StroredProcedures" />
     <Folder Include="SteelProfiles\Beams\dbo\Tables" />
+    <Folder Include="Standards" />
+    <Folder Include="Standards\dbo" />
+    <Folder Include="Standards\dbo\Tables" />
+    <Folder Include="Standards\dbo\StoredProcedures" />
+    <Folder Include="SteelProfiles\Pipes\dbo" />
+    <Folder Include="SteelProfiles\Pipes\dbo\Tables" />
+    <Folder Include="SteelProfiles\Pipes\dbo\StoredProcedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="SteelProfiles\Channels\dbo\Tables\Channels.sql" />
@@ -100,9 +107,16 @@
     <Build Include="SteelProfiles\Beams\dbo\StroredProcedures\spBeams_Insert.sql" />
     <Build Include="SteelProfiles\Beams\dbo\StroredProcedures\spBeams_Update.sql" />
     <Build Include="SteelProfiles\Beams\dbo\Tables\Beams.sql" />
+    <Build Include="Standards\dbo\Tables\Standards.sql" />
+    <Build Include="SteelProfiles\Pipes\dbo\Tables\Pipes.sql" />
+    <Build Include="SteelProfiles\Pipes\dbo\StoredProcedures\spPipes_Get.sql" />
+    <Build Include="Standards\dbo\StoredProcedures\spStandards_GetAll.sql" />
+    <Build Include="Standards\dbo\StoredProcedures\spStandards_Insert.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="EngDataDB_Azure.publish.publish.xml" />
     <None Include="EngDataDB.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
 </Project>

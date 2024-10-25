@@ -22,6 +22,8 @@ public class Program
         //Console.WriteLine("FlangeThickness: " + channel.t);
         //Console.ReadLine();
 
+        //List<AngleDTO> angles = await DBAccess.GetSteelProfiles<AngleDTO>("AS 3679", "Equal Angles", "75x75x10");
+
         await PostNew();
     }
     static async Task PostNew()
