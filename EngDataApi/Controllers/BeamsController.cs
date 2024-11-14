@@ -15,18 +15,24 @@ public class BeamsController : ControllerBase
         _data = data;
     }
 
-    [HttpGet("All", Name = "GetAllBeams")]
+    private IResult HandleException(Exception ex)
+    {
+        // Log the exception
+        return Results.Problem(ex.Message);
+    }
+
+    [HttpGet("all", Name = "GetAllBeams")]
     public async Task<IResult> GetAllBeams()
     {
         try
         {
             var results = await _data.GetAllBeams();
-            var listResults = ControllerMethods.FilterByAccess(results.ToList(), User);
-            return Results.Ok(listResults);
+            var filteredResults = ControllerMethods.FilterByAccess(results.ToList(), User);
+            return Results.Ok(filteredResults);
         }
         catch (Exception ex)
         {
-            return Results.Problem(ex.Message);
+            return HandleException(ex);
         }
     }
 
@@ -39,34 +45,38 @@ public class BeamsController : ControllerBase
         try
         {
             var results = await _data.GetBeams(standard, variation, designation);
-            if (results == null)
-                return Results.NotFound("No Beam found matching the specified criteria.");
-            return Results.Ok(results);
+            return results is not null && results.Any()
+                ? Results.Ok(results)
+                : Results.NotFound("No beams found matching the specified criteria.");
         }
         catch (Exception ex)
         {
-            return Results.Problem("An error occurred: " + ex.Message);
+            return HandleException(ex);
         }
     }
 
-    [HttpGet("id={id}", Name = "GetBeamById")]
-    public async Task<IResult> GetBeam(int id)
+    [HttpGet("id={id:guid}", Name = "GetBeamById")]
+    public async Task<IResult> GetBeamById(Guid id)
     {
         try
         {
-            var results = await _data.GetBeamById(id);
-            if (results == null) return Results.NotFound();
-            return Results.Ok(results);
+            var result = await _data.GetBeamById(id);
+            return result is not null
+                ? Results.Ok(result)
+                : Results.NotFound($"Beam with ID {id} not found.");
         }
         catch (Exception ex)
         {
-            return Results.Problem(ex.Message);
+            return HandleException(ex);
         }
     }
 
     [HttpPost(Name = "InsertBeam")]
     public async Task<IResult> InsertBeam([FromBody] BeamDTO profile)
     {
+        if (!ModelState.IsValid)
+            return Results.BadRequest(ModelState);
+
         var userName = ControllerMethods.GetUserName(User);
 
         try
@@ -76,13 +86,15 @@ public class BeamsController : ControllerBase
         }
         catch (Exception ex)
         {
-            return Results.Problem(ex.Message);
+            return HandleException(ex);
         }
     }
 
     [HttpPut(Name = "UpdateBeam")]
     public async Task<IResult> UpdateBeam([FromBody] BeamDTO profile)
     {
+        if (!ModelState.IsValid)
+            return Results.BadRequest(ModelState);
         try
         {
             await _data.UpdateBeam(profile);
@@ -90,12 +102,12 @@ public class BeamsController : ControllerBase
         }
         catch (Exception ex)
         {
-            return Results.Problem(ex.Message);
+            return HandleException(ex);
         }
     }
 
-    [HttpPut("{id}", Name = "ArchiveBeam")]
-    public async Task<IResult> ArchiveBeam(int id)
+    [HttpPut("{id:guid}", Name = "ArchiveBeam")]
+    public async Task<IResult> ArchiveBeam(Guid id)
     {
         try
         {
@@ -104,12 +116,12 @@ public class BeamsController : ControllerBase
         }
         catch (Exception ex)
         {
-            return Results.Problem(ex.Message);
+            return HandleException(ex);
         }
     }
 
-    [HttpDelete("{id}", Name = "DeleteBeam")]
-    public async Task<IResult> DeleteBeam(int id)
+    [HttpDelete("{id:guid}", Name = "DeleteBeam")]
+    public async Task<IResult> DeleteBeam(Guid id)
     {
         try
         {
@@ -118,7 +130,7 @@ public class BeamsController : ControllerBase
         }
         catch (Exception ex)
         {
-            return Results.Problem(ex.Message);
+            return HandleException(ex);
         }
     }
 }

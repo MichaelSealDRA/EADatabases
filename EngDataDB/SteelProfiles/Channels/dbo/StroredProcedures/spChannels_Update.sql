@@ -1,11 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[spAngles_Update]
-    @Id uniqueidentifier,
-    @StandardId uniqueidentifier,
+﻿CREATE PROCEDURE [dbo].[spChannels_Update]
+    @Id UNIQUEIDENTIFIER,
+    @StandardId UNIQUEIDENTIFIER,
     @Modified BIT,
     @Preferred BIT,
     @Variation NVARCHAR(50),
     @Designation NVARCHAR(50),
-
     @Date DATETIME,
     @Active BIT,
     @Uploader NVARCHAR(50),
@@ -13,10 +12,12 @@
     @G FLOAT,
     @h FLOAT,
     @b FLOAT,
+    @s FLOAT,
     @t FLOAT,
     @A FLOAT,
     @r1 FLOAT,
     @r2 FLOAT,
+    @Beta FLOAT,
     @Ix FLOAT,
     @Sx FLOAT,
     @Rx FLOAT,
@@ -25,18 +26,17 @@
     @Ry FLOAT,
     @Tr FLOAT,
     @Ts FLOAT,
-    @ax FLOAT,
+    @ac FLOAT,
     @ay FLOAT
 AS
 BEGIN
-    UPDATE dbo.[Angles]
+    UPDATE dbo.[Channels]
     SET 
         StandardId = @StandardId,
         Modified = @Modified,
         Preferred = @Preferred,
         Variation = @Variation,
         Designation = @Designation,
-
         Date = @Date,
         Active = @Active,
         Uploader = @Uploader,
@@ -44,10 +44,12 @@ BEGIN
         G = @G,
         h = @h,
         b = @b,
+        s = @s,
         t = @t,
         A = @A,
         r1 = @r1,
         r2 = @r2,
+        Beta = @Beta,
         Ix = @Ix,
         Sx = @Sx,
         Rx = @Rx,
@@ -56,8 +58,8 @@ BEGIN
         Ry = @Ry,
         Tr = @Tr,
         Ts = @Ts,
-        ax = @ax,
+        ac = @ac,
         ay = @ay
-
-    WHERE Id = @Id;
+    WHERE 
+        Id = @Id;
 END;

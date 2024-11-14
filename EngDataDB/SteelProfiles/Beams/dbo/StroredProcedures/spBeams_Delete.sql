@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spBeams_Delete]
-    @Id INT
+    @Id UNIQUEIDENTIFIER
 AS
 BEGIN
     DELETE FROM dbo.[Beams]

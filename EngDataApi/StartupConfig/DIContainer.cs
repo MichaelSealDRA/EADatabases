@@ -55,7 +55,7 @@ public static class EADatabaseApiDI
         builder.Services.AddSingleton<IAngleData, AngleData>();
         builder.Services.AddSingleton<IBeamData, BeamData>();
         builder.Services.AddSingleton<IChannelData, ChannelData>();
-        builder.Services.AddSingleton<IPrimaryInfoData, PrimaryInfoData>();
+        builder.Services.AddSingleton<ICircular_HollowSectionData, Circular_HollowSectionData>();
         builder.Services.AddSingleton<IStandardsData, StandardsData>();
     }
 

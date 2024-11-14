@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spBeams_Update]
+﻿CREATE PROCEDURE [dbo].[spCircular_HollowSections_Update]
     @Id UNIQUEIDENTIFIER,
     @StandardId UNIQUEIDENTIFIER,
     @Modified BIT,
@@ -9,26 +9,17 @@
     @Active BIT,
     @Uploader NVARCHAR(50),
 
-    @G FLOAT,
-    @h FLOAT,
-    @b FLOAT,
-    @s FLOAT,
-    @t FLOAT,
+    @D FLOAT,
+    @T FLOAT,
+    @M FLOAT,
     @A FLOAT,
-    @r1 FLOAT,
-    @r2 FLOAT,
-    @Beta FLOAT,
     @Ix FLOAT,
-    @Sx FLOAT,
-    @Rx FLOAT,
     @Iy FLOAT,
-    @Sy FLOAT,
-    @Ry FLOAT,
-    @Tr FLOAT,
-    @Ts FLOAT
+    @Rx FLOAT,
+    @Ry FLOAT
 AS
 BEGIN
-    UPDATE dbo.[Beams]
+    UPDATE dbo.[Circular_HollowSections]
     SET 
         StandardId = @StandardId,
         Modified = @Modified,
@@ -38,24 +29,14 @@ BEGIN
         Date = @Date,
         Active = @Active,
         Uploader = @Uploader,
-
-        G = @G,
-        h = @h,
-        b = @b,
-        s = @s,
-        t = @t,
+        D = @D,
+        T = @T,
+        M = @M,
         A = @A,
-        r1 = @r1,
-        r2 = @r2,
-        Beta = @Beta,
         Ix = @Ix,
-        Sx = @Sx,
-        Rx = @Rx,
         Iy = @Iy,
-        Sy = @Sy,
-        Ry = @Ry,
-        Tr = @Tr,
-        Ts = @Ts
-
-    WHERE Id = @Id;
+        Rx = @Rx,
+        Ry = @Ry
+    WHERE 
+        Id = @Id;
 END;

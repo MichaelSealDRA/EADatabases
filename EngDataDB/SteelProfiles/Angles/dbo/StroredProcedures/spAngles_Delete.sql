@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spAngles_Delete]
-    @Id INT
+    @Id uniqueidentifier
 AS
 BEGIN
     DELETE FROM dbo.[Angles]

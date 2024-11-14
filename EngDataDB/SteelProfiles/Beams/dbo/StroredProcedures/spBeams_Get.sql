@@ -4,11 +4,44 @@
     @Designation NVARCHAR(50) = NULL
 AS
 BEGIN
-    SELECT Id, Standard, Modified, Metric, Preferred, Variation, Designation, Description, 
-           G, h, b, s, t, A, r1, r2, Beta, Ix, Sx, Rx, Iy, Sy, Ry, Tr, Ts, 
-           Verified, Reference, Official, Comments, Date, Active, Uploader, Access
-    FROM dbo.[Beams]
-    WHERE (@Standard IS NULL OR Standard = @Standard)
-      AND (@Variation IS NULL OR Variation = @Variation)
-      AND (@Designation IS NULL OR Designation = @Designation);
+    SELECT 
+        BeamsTable.Id, 
+        BeamsTable.StandardId, 
+        BeamsTable.Modified, 
+        BeamsTable.Preferred, 
+        BeamsTable.Variation, 
+        BeamsTable.Designation, 
+        BeamsTable.Date, 
+        BeamsTable.Active, 
+        BeamsTable.Uploader,
+        BeamsTable.G, 
+        BeamsTable.h, 
+        BeamsTable.b, 
+        BeamsTable.s, 
+        BeamsTable.t, 
+        BeamsTable.A, 
+        BeamsTable.r1, 
+        BeamsTable.r2, 
+        BeamsTable.Beta, 
+        BeamsTable.Ix, 
+        BeamsTable.Sx, 
+        BeamsTable.Rx, 
+        BeamsTable.Iy, 
+        BeamsTable.Sy, 
+        BeamsTable.Ry, 
+        BeamsTable.Tr, 
+        BeamsTable.Ts,
+        StandardsTable.Code AS Standard, 
+        StandardsTable.Description, 
+        StandardsTable.Metric, 
+        StandardsTable.Verified, 
+        StandardsTable.Access
+    FROM 
+        dbo.[Beams] BeamsTable
+    INNER JOIN 
+        dbo.[Standards] StandardsTable ON BeamsTable.StandardId = StandardsTable.Id
+    WHERE 
+        (@Standard IS NULL OR StandardsTable.Code = @Standard)
+        AND (@Variation IS NULL OR BeamsTable.Variation = @Variation)
+        AND (@Designation IS NULL OR BeamsTable.Designation = @Designation);
 END;

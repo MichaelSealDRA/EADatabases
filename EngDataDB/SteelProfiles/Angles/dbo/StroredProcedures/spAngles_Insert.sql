@@ -1,11 +1,15 @@
 ﻿CREATE PROCEDURE [dbo].[spAngles_Insert]
-    @Standard NVARCHAR(50),
+
+    @StandardId uniqueidentifier,
     @Modified BIT,
-    @Metric BIT,
     @Preferred BIT,
     @Variation NVARCHAR(50),
     @Designation NVARCHAR(50),
-    @Description NVARCHAR(50),
+
+    @Date DATETIME,
+    @Active BIT,
+    @Uploader NVARCHAR(50),
+
     @G FLOAT,
     @h FLOAT,
     @b FLOAT,
@@ -22,17 +26,9 @@
     @Tr FLOAT,
     @Ts FLOAT,
     @ax FLOAT,
-    @ay FLOAT,
-    @Verified BIT,
-    @Reference NVARCHAR(50),
-    @Official BIT,
-    @Comments NVARCHAR(500),
-    @Date DATETIME,
-    @Active BIT,
-    @Uploader NVARCHAR(50),
-    @Access NVARCHAR(200)
+    @ay FLOAT
 AS
 BEGIN
-    INSERT INTO dbo.[Angles] (Standard, Modified, Metric, Preferred, Variation, Designation, Description, G, h, b, t, A, r1, r2, Ix, Sx, Rx, Iy, Sy, Ry, Tr, Ts, ax, ay, Verified, Reference, Official, Comments, Date, Active, Uploader, Access)
-    VALUES (@Standard, @Modified, @Metric, @Preferred, @Variation, @Designation, @Description, @G, @h, @b, @t, @A, @r1, @r2, @Ix, @Sx, @Rx, @Iy, @Sy, @Ry, @Tr, @Ts, @ax, @ay, @Verified, @Reference, @Official, @Comments, @Date, @Active, @Uploader, @Access);
+    INSERT INTO dbo.[Angles] (StandardId, Modified, Preferred, Variation, Designation, Date, Active, Uploader, G, h, b, t, A, r1, r2, Ix, Sx, Rx, Iy, Sy, Ry, Tr, Ts, ax, ay)
+    VALUES (@StandardId, @Modified, @Preferred, @Variation, @Designation, @Date, @Active, @Uploader, @G, @h, @b, @t, @A, @r1, @r2, @Ix, @Sx, @Rx, @Iy, @Sy, @Ry, @Tr, @Ts, @ax, @ay);
 END;

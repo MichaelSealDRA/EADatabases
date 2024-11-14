@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Channels]
+﻿CREATE TABLE [dbo].[Circular_HollowSections]
 (
     [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     [StandardId] UNIQUEIDENTIFIER NOT NULL,
@@ -10,23 +10,12 @@
     [Active] BIT NOT NULL,
     [Uploader] NVARCHAR(50) NULL,
 
-    [G] FLOAT NULL,
-    [h] FLOAT NOT NULL,
-    [b] FLOAT NOT NULL,
-    [s] FLOAT NULL,
-    [t] FLOAT NULL,
+    [D] FLOAT NULL,
+    [T] FLOAT NULL,
+    [M] FLOAT NULL,
     [A] FLOAT NULL,
-    [r1] FLOAT NULL,
-    [r2] FLOAT NULL,
-    [Beta] FLOAT NULL,
     [Ix] FLOAT NULL,
-    [Sx] FLOAT NULL,
-    [Rx] FLOAT NULL,
     [Iy] FLOAT NULL,
-    [Sy] FLOAT NULL,
-    [Ry] FLOAT NULL,
-    [Tr] FLOAT NULL,
-    [Ts] FLOAT NULL,
-    [ac] FLOAT NULL,
-    [ay] FLOAT NULL
+    [Rx] FLOAT NULL,
+    [Ry] FLOAT NULL
 );

@@ -1,13 +1,15 @@
 ﻿CREATE TABLE [dbo].[Beams]
 (
-    [Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [Standard] NVARCHAR(50) NOT NULL,
-    [Modified] BIT NOT NULL DEFAULT 0,
-    [Metric] BIT NOT NULL DEFAULT 1,
-    [Preferred] BIT NOT NULL DEFAULT 0,
-    [Variation] NVARCHAR(50) NOT NULL, 
+    [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    [StandardId] UNIQUEIDENTIFIER NOT NULL,
+    [Modified] BIT NOT NULL,
+    [Preferred] BIT NOT NULL,
+    [Variation] NVARCHAR(50) NOT NULL,
     [Designation] NVARCHAR(50) NOT NULL,
-    [Description] NVARCHAR(50) NOT NULL,
+    [Date] DATETIME NOT NULL,
+    [Active] BIT NOT NULL,
+    [Uploader] NVARCHAR(50) NULL,
+
     [G] FLOAT NULL,
     [h] FLOAT NOT NULL,
     [b] FLOAT NOT NULL,
@@ -24,13 +26,5 @@
     [Sy] FLOAT NULL,
     [Ry] FLOAT NULL,
     [Tr] FLOAT NULL,
-    [Ts] FLOAT NULL,
-    [Verified] BIT NOT NULL DEFAULT 0,
-    [Reference] NVARCHAR(50) NULL,
-    [Official] BIT NOT NULL DEFAULT 1,
-    [Comments] NVARCHAR(500) NULL,
-    [Date] DATETIME NULL,
-    [Active] BIT NULL DEFAULT 1,
-    [Uploader] NVARCHAR(50) NULL,
-    [Access] NVARCHAR(200) NULL
+    [Ts] FLOAT NULL
 );

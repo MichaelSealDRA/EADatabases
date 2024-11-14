@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spBeams_Insert]
+﻿CREATE PROCEDURE [dbo].[spChannels_Insert]
     @StandardId UNIQUEIDENTIFIER,
     @Modified BIT,
     @Preferred BIT,
@@ -24,17 +24,19 @@
     @Sy FLOAT,
     @Ry FLOAT,
     @Tr FLOAT,
-    @Ts FLOAT
+    @Ts FLOAT,
+    @ac FLOAT,
+    @ay FLOAT
 AS
 BEGIN
-    INSERT INTO dbo.[Beams] 
+    INSERT INTO dbo.[Channels] 
     (
         StandardId, Modified, Preferred, Variation, Designation, Date, Active, Uploader,
-        G, h, b, s, t, A, r1, r2, Beta, Ix, Sx, Rx, Iy, Sy, Ry, Tr, Ts
+        G, h, b, s, t, A, r1, r2, Beta, Ix, Sx, Rx, Iy, Sy, Ry, Tr, Ts, ac, ay
     )
     VALUES 
     (
         @StandardId, @Modified, @Preferred, @Variation, @Designation, @Date, @Active, @Uploader,
-        @G, @h, @b, @s, @t, @A, @r1, @r2, @Beta, @Ix, @Sx, @Rx, @Iy, @Sy, @Ry, @Tr, @Ts
+        @G, @h, @b, @s, @t, @A, @r1, @r2, @Beta, @Ix, @Sx, @Rx, @Iy, @Sy, @Ry, @Tr, @Ts, @ac, @ay
     );
 END;

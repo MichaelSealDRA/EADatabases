@@ -14,19 +14,24 @@ public class AnglesController : ControllerBase
     {
         _data = data;
     }
+    private IResult HandleException(Exception ex)
+    {
+        // Log the exception
+        return Results.Problem(ex.Message);
+    }
 
-    [HttpGet("All", Name = "GetAllAngles")]
+    [HttpGet("all", Name = "GetAllAngles")]
     public async Task<IResult> GetAllAngles()
     {
         try
         {
             var results = await _data.GetAllAngles();
-            var listResults = ControllerMethods.FilterByAccess(results.ToList(), User);
-            return Results.Ok(listResults);
+            var filteredResults = ControllerMethods.FilterByAccess(results.ToList(), User);
+            return Results.Ok(filteredResults);
         }
         catch (Exception ex)
         {
-            return Results.Problem(ex.Message);
+            return HandleException(ex);
         }
     }
 
@@ -39,34 +44,38 @@ public class AnglesController : ControllerBase
         try
         {
             var results = await _data.GetAngles(standard, variation, designation);
-            if (results == null)
-                return Results.NotFound("No Angle found matching the specified criteria.");
-            return Results.Ok(results);
+            return results is not null && results.Any()
+                ? Results.Ok(results)
+                : Results.NotFound("No angles found matching the specified criteria.");
         }
         catch (Exception ex)
         {
-            return Results.Problem("An error occurred: " + ex.Message);
+            return HandleException(ex);
         }
     }
 
-    [HttpGet("id={id}", Name = "GetAngleById")]
-    public async Task<IResult> GetAngle(int id)
+    [HttpGet("id={id:guid}", Name = "GetAngleById")]
+    public async Task<IResult> GetAngleById(Guid id)
     {
         try
         {
-            var results = await _data.GetAngleById(id);
-            if (results == null) return Results.NotFound();
-            return Results.Ok(results);
+            var result = await _data.GetAngleById(id);
+            return result is not null 
+                ? Results.Ok(result) 
+                : Results.NotFound($"Angle with ID {id} not found.");
         }
         catch (Exception ex)
         {
-            return Results.Problem(ex.Message);
+            return HandleException(ex);
         }
     }
 
     [HttpPost(Name = "InsertAngle")]
     public async Task<IResult> InsertAngle([FromBody] AngleDTO profile)
     {
+        if (!ModelState.IsValid)
+            return Results.BadRequest(ModelState);
+
         var userName = ControllerMethods.GetUserName(User);
 
         try
@@ -76,13 +85,15 @@ public class AnglesController : ControllerBase
         }
         catch (Exception ex)
         {
-            return Results.Problem(ex.Message);
+            return HandleException(ex);
         }
     }
 
     [HttpPut(Name = "UpdateAngle")]
     public async Task<IResult> UpdateAngle([FromBody] AngleDTO profile)
     {
+        if (!ModelState.IsValid)
+            return Results.BadRequest(ModelState);
         try
         {
             await _data.UpdateAngle(profile);
@@ -90,12 +101,12 @@ public class AnglesController : ControllerBase
         }
         catch (Exception ex)
         {
-            return Results.Problem(ex.Message);
+            return HandleException(ex);
         }
     }
 
-    [HttpPut("{id}", Name = "ArchiveAngle")]
-    public async Task<IResult> ArchiveAngle(int id)
+    [HttpPut("{id:guid}", Name = "ArchiveAngle")]
+    public async Task<IResult> ArchiveAngle(Guid id)
     {
         try
         {
@@ -104,12 +115,12 @@ public class AnglesController : ControllerBase
         }
         catch (Exception ex)
         {
-            return Results.Problem(ex.Message);
+            return HandleException(ex);
         }
     }
 
-    [HttpDelete("{id}", Name = "DeleteAngle")]
-    public async Task<IResult> DeleteAngle(int id)
+    [HttpDelete("{id:guid}", Name = "DeleteAngle")]
+    public async Task<IResult> DeleteAngle(Guid id)
     {
         try
         {
@@ -118,7 +129,7 @@ public class AnglesController : ControllerBase
         }
         catch (Exception ex)
         {
-            return Results.Problem(ex.Message);
+            return HandleException(ex);
         }
     }
 }
