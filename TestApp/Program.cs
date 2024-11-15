@@ -6,7 +6,7 @@ public class Program
     {
         string excelFilePath = @"C:\Users\Michael.Seal\Desktop\Databases\DB_SteelProfiles.xlsx";
 
-        //await PopulateDBMethods.PopulateStandards(excelFilePath, "Standards");
+        await PopulateDBMethods.PopulateStandards(excelFilePath, "Standards");
         await PopulateDBMethods.PopulateSteelProfiles<AngleDTO>(excelFilePath, "Angles");
         await PopulateDBMethods.PopulateSteelProfiles<BeamDTO>(excelFilePath, "Beams");
         await PopulateDBMethods.PopulateSteelProfiles<ChannelDTO>(excelFilePath, "Channels");
