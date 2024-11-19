@@ -24,17 +24,18 @@
     @Sy FLOAT,
     @Ry FLOAT,
     @Tr FLOAT,
-    @Ts FLOAT
+    @Ts FLOAT,
+    @Tapered BIT
 AS
 BEGIN
     INSERT INTO dbo.[Beams] 
     (
         StandardId, Modified, Preferred, Variation, Designation, Date, Active, Uploader,
-        G, h, b, s, t, A, r1, r2, Beta, Ix, Sx, Rx, Iy, Sy, Ry, Tr, Ts
+        G, h, b, s, t, A, r1, r2, Beta, Ix, Sx, Rx, Iy, Sy, Ry, Tr, Ts, Tapered
     )
     VALUES 
     (
         @StandardId, @Modified, @Preferred, @Variation, @Designation, @Date, @Active, @Uploader,
-        @G, @h, @b, @s, @t, @A, @r1, @r2, @Beta, @Ix, @Sx, @Rx, @Iy, @Sy, @Ry, @Tr, @Ts
+        @G, @h, @b, @s, @t, @A, @r1, @r2, @Beta, @Ix, @Sx, @Rx, @Iy, @Sy, @Ry, @Tr, @Ts, @Tapered
     );
 END;

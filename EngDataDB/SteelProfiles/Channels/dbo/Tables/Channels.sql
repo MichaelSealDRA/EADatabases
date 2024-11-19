@@ -28,5 +28,6 @@
     [Tr] FLOAT NULL,
     [Ts] FLOAT NULL,
     [ac] FLOAT NULL,
-    [ay] FLOAT NULL
+    [ay] FLOAT NULL,
+    [Tapered] bit NOT NULL,
 );

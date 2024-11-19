@@ -31,6 +31,7 @@ BEGIN
         ChannelsTable.Ts, 
         ChannelsTable.ac, 
         ChannelsTable.ay,
+        ChannelsTable.Tapered,
         StandardsTable.Code AS Standard, 
         StandardsTable.Description, 
         StandardsTable.Metric, 

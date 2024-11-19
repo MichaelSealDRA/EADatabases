@@ -27,7 +27,8 @@
     @Tr FLOAT,
     @Ts FLOAT,
     @ac FLOAT,
-    @ay FLOAT
+    @ay FLOAT,
+    @Tapered BIT
 AS
 BEGIN
     UPDATE dbo.[Channels]
@@ -59,7 +60,8 @@ BEGIN
         Tr = @Tr,
         Ts = @Ts,
         ac = @ac,
-        ay = @ay
+        ay = @ay,
+        Tapered = @Tapered
     WHERE 
         Id = @Id;
 END;

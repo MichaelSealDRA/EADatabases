@@ -26,17 +26,18 @@
     @Tr FLOAT,
     @Ts FLOAT,
     @ac FLOAT,
-    @ay FLOAT
+    @ay FLOAT,
+    @Tapered BIT
 AS
 BEGIN
     INSERT INTO dbo.[Channels] 
     (
         StandardId, Modified, Preferred, Variation, Designation, Date, Active, Uploader,
-        G, h, b, s, t, A, r1, r2, Beta, Ix, Sx, Rx, Iy, Sy, Ry, Tr, Ts, ac, ay
+        G, h, b, s, t, A, r1, r2, Beta, Ix, Sx, Rx, Iy, Sy, Ry, Tr, Ts, ac, ay, Tapered
     )
     VALUES 
     (
         @StandardId, @Modified, @Preferred, @Variation, @Designation, @Date, @Active, @Uploader,
-        @G, @h, @b, @s, @t, @A, @r1, @r2, @Beta, @Ix, @Sx, @Rx, @Iy, @Sy, @Ry, @Tr, @Ts, @ac, @ay
+        @G, @h, @b, @s, @t, @A, @r1, @r2, @Beta, @Ix, @Sx, @Rx, @Iy, @Sy, @Ry, @Tr, @Ts, @ac, @ay, @Tapered
     );
 END;

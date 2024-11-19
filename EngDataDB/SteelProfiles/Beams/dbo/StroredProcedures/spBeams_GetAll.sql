@@ -28,6 +28,7 @@ BEGIN
         BeamsTable.Ry, 
         BeamsTable.Tr, 
         BeamsTable.Ts,
+        BeamsTable.Tapered,
         StandardsTable.Code AS Standard, 
         StandardsTable.Description, 
         StandardsTable.Metric, 

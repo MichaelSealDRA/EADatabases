@@ -25,7 +25,8 @@
     @Sy FLOAT,
     @Ry FLOAT,
     @Tr FLOAT,
-    @Ts FLOAT
+    @Ts FLOAT,
+    @Tapered BIT
 AS
 BEGIN
     UPDATE dbo.[Beams]
@@ -55,7 +56,8 @@ BEGIN
         Sy = @Sy,
         Ry = @Ry,
         Tr = @Tr,
-        Ts = @Ts
+        Ts = @Ts,
+        Tapered = @Tapered
 
     WHERE Id = @Id;
 END;
