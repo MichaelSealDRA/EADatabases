@@ -14,7 +14,6 @@ public static class EADatabaseApiDI
         builder.Services.AddEndpointsApiExplorer();
         builder.AddSwaggerServices();
     }
-
     private static void AddSwaggerServices(this WebApplicationBuilder builder)
     {
         var securityScheme = new OpenApiSecurityScheme()
@@ -48,17 +47,15 @@ public static class EADatabaseApiDI
             opts.AddSecurityRequirement(securityRequirement);
         });
     }
-
     public static void AddCustomServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+        builder.Services.AddSingleton<IStandardsData, StandardsData>();
         builder.Services.AddSingleton<IAngleData, AngleData>();
         builder.Services.AddSingleton<IBeamData, BeamData>();
         builder.Services.AddSingleton<IChannelData, ChannelData>();
         builder.Services.AddSingleton<ICircular_HollowSectionData, Circular_HollowSectionData>();
-        builder.Services.AddSingleton<IStandardsData, StandardsData>();
     }
-
     public static void AddAuthServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddAuthorization(opts =>
@@ -84,7 +81,6 @@ public static class EADatabaseApiDI
                 };
             });
     }
-
     public static void AddHealthCheckServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddHealthChecks()
